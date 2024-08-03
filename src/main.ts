@@ -1,7 +1,7 @@
 import { Logger, ValidationPipe } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
 import { NestFactory } from "@nestjs/core";
-import { FastifyAdapter, NestFastifyApplication } from "@nestjs/platform-fastify";
+import { FastifyAdapter, type NestFastifyApplication } from "@nestjs/platform-fastify";
 import { DocumentBuilder, SwaggerModule } from "@nestjs/swagger";
 import { AppModule } from "./app.module";
 
@@ -20,15 +20,17 @@ async function bootstrap() {
 		}),
 	);
 
+	app.setGlobalPrefix("api");
+
 	const swaggerConfig = new DocumentBuilder()
-		.setTitle("NestJS template")
-		.setDescription("The NestJS API template description")
+		.setTitle("NestJS Simplified PIX")
+		.setDescription("The API Documentation")
 		.setVersion("1.0")
-		.addTag("template")
+		.addTag("api")
 		.build();
 
 	const swaggerDocument = SwaggerModule.createDocument(app, swaggerConfig);
-	SwaggerModule.setup("api", app, swaggerDocument);
+	SwaggerModule.setup("docs", app, swaggerDocument);
 
 	try {
 		await app.listen(PORT, "0.0.0.0");
