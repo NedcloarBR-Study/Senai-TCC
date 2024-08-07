@@ -2,8 +2,10 @@ version: "3.8"
 
 services:
   api:
-    container_name: nestjs_simplified_pix_api
+    container_name: ndix_api
     build: .
+    depends_on:
+      - database
     restart: always
     tty: true
     volumes:
@@ -12,10 +14,10 @@ services:
     command: >
       make start-prod
     networks:
-      - nestjs_simplified_pix_network
+      - ndix_network
   database:
     image: bitnami/postgresql:15.6.0
-    container_name: nestjs_simplified_pix_database
+    container_name: ndix_database
     restart: always
     ports:
       - "5432:5432"
@@ -30,8 +32,8 @@ services:
       timeout: 10s
       retries: 5
     networks:
-      - nestjs_simplified_pix_network
+      - ndix_network
 
 networks:
-  nestjs_simplified_pix_network:
+  ndix_network:
     driver: bridge
