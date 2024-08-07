@@ -1,6 +1,7 @@
 import { Module } from "@nestjs/common";
 import { ConfigModule } from "@nestjs/config";
 import { PrismaModule } from "nestjs-prisma";
+import { UserModule } from "./modules";
 
 @Module({
 	imports: [
@@ -10,6 +11,7 @@ import { PrismaModule } from "nestjs-prisma";
 		PrismaModule.forRoot({
 			isGlobal: true,
 		}),
+		UserModule,
 	],
 })
 export class AppModule {}

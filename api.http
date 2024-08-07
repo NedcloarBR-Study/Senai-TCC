@@ -1,0 +1,45 @@
+# Don't use this file to test the POST endpoints will return the following error
+# REST Client extension error
+# Use Postman, Thunder Client, Insominia, etc...
+# HTTP/1.1 415 Unsupported Media Type
+# content-type: application/json; charset=utf-8
+# content-length: 64
+# Date: Sat, 03 Aug 2024 22:37:14 GMT
+# Connection: close
+
+# {
+#   "statusCode": 415,
+#   "message": "Unsupported Media Type: undefined"
+# }
+
+# DOCS/Swagger
+GET http://localhost:9900/docs
+
+# USER
+### Route
+GET http://localhost:9900/api/users
+
+### Create
+POST http://localhost:9900/api/users
+
+Content-Type: application/json
+{
+  "firstName": "Name",
+  "lastName": "LastName",
+  "email": "email@email.com",
+  "password": "ultrasecretpassword123",
+  "userType": "CPF | CPNPJ",
+  "document": "CPForCNPJ"
+}
+
+### Document
+# GET http://localhost:9900/api/users/document/CPForCNPJ
+
+### Email
+# GET http://localhost:9900/api/users/email/email@email.com
+
+### PublicID
+GET http://localhost:9900/api/users/UUID
+
+### List
+GET http://localhost:9900/api/users/list
