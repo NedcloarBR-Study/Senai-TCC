@@ -23,25 +23,25 @@ export class UserRepository implements IUserRepository {
 		return (await this.safeQuery("Single", user)) as UserEntity;
 	}
 
-	// public async findByDocument(document: string): Promise<UserEntity> {
-	// 	const user = await this.prisma.user.findFirst({
-	// 		where: {
-	// 			document,
-	// 		},
-	// 	});
+	public async findByDocument(document: string): Promise<UserEntity> {
+		const user = await this.prisma.user.findFirst({
+			where: {
+				document,
+			},
+		});
 
-	// 	return (await this.safeQuery("Single", user)) as UserEntity;
-	// }
+		return (await this.safeQuery("Single", user)) as UserEntity;
+	}
 
-	// public async findByEmail(email: string): Promise<UserEntity> {
-	// 	const user = await this.prisma.user.findFirst({
-	// 		where: {
-	// 			email,
-	// 		},
-	// 	});
+	public async findByEmail(email: string): Promise<UserEntity> {
+		const user = await this.prisma.user.findFirst({
+			where: {
+				email,
+			},
+		});
 
-	// 	return (await this.safeQuery("Single", user)) as UserEntity;
-	// }
+		return (await this.safeQuery("Single", user)) as UserEntity;
+	}
 
 	public async findMany(): Promise<UserEntity[]> {
 		const users = await this.prisma.user.findMany();
@@ -54,12 +54,11 @@ export class UserRepository implements IUserRepository {
 
 	private async safeQuery(query: "All" | "Single", entity: user[] | user): Promise<UserEntity[] | UserEntity> {
 		switch (query) {
-			case "All": {
+			case "All":
 				return (entity as user[]).map((user) => {
 					const { password, id, ...safeUser } = user;
 					return safeUser;
 				}) as UserEntity[];
-			}
 
 			case "Single": {
 				const { password, id, ...safeUser } = entity as user;

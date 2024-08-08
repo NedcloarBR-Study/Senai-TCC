@@ -17,13 +17,13 @@ export class UserService implements IUserService {
 		return await this.userRepository.findByPublicId(publicId);
 	}
 
-	// public async findByDocument(document: string): Promise<UserEntity> {
-	// 	return await this.userRepository.findByDocument(document);
-	// }
+	public async findByDocument(document: string): Promise<UserEntity> {
+		return await this.userRepository.findByDocument(document);
+	}
 
-	// public async findByEmail(email: string): Promise<UserEntity> {
-	// 	return await this.userRepository.findByEmail(email);
-	// }
+	public async findByEmail(email: string): Promise<UserEntity> {
+		return await this.userRepository.findByEmail(email);
+	}
 
 	public async findMany(): Promise<UserEntity[]> {
 		return await this.userRepository.findMany();
