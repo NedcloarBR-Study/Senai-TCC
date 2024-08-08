@@ -1,21 +1,26 @@
-import { Injectable } from "@nestjs/common";
+import { Inject, Injectable } from "@nestjs/common";
 import { user } from "@prisma/client";
-import { PrismaService } from "nestjs-prisma";
+import { CustomPrismaService } from "nestjs-prisma";
+import { Services } from "src/types/constants";
 import { type IUserRepository, type UserEntity } from ".";
+import { ExtendedPrismaClient } from "../database/ExtendedPrismaClient";
 import { UserDTO } from "./user.dto";
 
 @Injectable()
 export class UserRepository implements IUserRepository {
-	public constructor(private readonly prisma: PrismaService) {}
+	public constructor(
+		@Inject(Services.Prisma)
+		private readonly prisma: CustomPrismaService<ExtendedPrismaClient>,
+	) {}
 
 	public async create(data: UserDTO): Promise<UserEntity> {
-		const user = await this.prisma.user.create({ data });
+		const user = await this.prisma.client.user.create({ data });
 		return (await this.safeQuery("Single", user)) as UserEntity;
 	}
 
 	public async findByPublicId(publicId: string): Promise<UserEntity> {
 		console.log(publicId);
-		const user = await this.prisma.user.findFirstOrThrow({
+		const user = await this.prisma.client.user.findFirstOrThrow({
 			where: {
 				publicId,
 			},
@@ -25,7 +30,7 @@ export class UserRepository implements IUserRepository {
 	}
 
 	public async findByDocument(document: string): Promise<UserEntity> {
-		const user = await this.prisma.user.findFirstOrThrow({
+		const user = await this.prisma.client.user.findFirstOrThrow({
 			where: {
 				document,
 			},
@@ -35,7 +40,7 @@ export class UserRepository implements IUserRepository {
 	}
 
 	public async findByEmail(email: string): Promise<UserEntity> {
-		const user = await this.prisma.user.findFirstOrThrow({
+		const user = await this.prisma.client.user.findFirstOrThrow({
 			where: {
 				email,
 			},
@@ -45,15 +50,18 @@ export class UserRepository implements IUserRepository {
 	}
 
 	public async findMany(): Promise<UserEntity[]> {
-		const users = await this.prisma.user.findMany();
+		const users = await this.prisma.client.user.findMany();
 		return (await this.safeQuery("All", users)) as UserEntity[];
 	}
 
 	public async count(): Promise<number> {
-		return await this.prisma.user.count();
+		return await this.prisma.client.user.count();
 	}
 
-	private async safeQuery(query: "All" | "Single", entity: user[] | user): Promise<UserEntity[] | UserEntity> {
+	private async safeQuery(
+		query: "All" | "Single",
+		entity: user[] | user,
+	): Promise<UserEntity[] | UserEntity> {
 		switch (query) {
 			case "All":
 				return (entity as user[]).map((user) => {

@@ -43,7 +43,11 @@ export class UserController {
 		description: "Already exists an User with this email or document",
 	})
 	public async create(@Body() data: UserDTO) {
-		return await this.userService.create(data);
+		const user = await this.userService.create(data);
+
+		return {
+			data: user,
+		};
 	}
 
 	@Get("document/:document")

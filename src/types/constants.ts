@@ -1,4 +1,5 @@
 export enum Services {
+	Prisma = "PRISMA_SERVICE",
 	User = "USER_SERVICE",
 }
 
