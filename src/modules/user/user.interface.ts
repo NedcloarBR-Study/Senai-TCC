@@ -1,5 +1,5 @@
 import type { UserEntity } from ".";
-import { UserDTO } from "./user.dto";
+import type { UserDTO } from "./user.dto";
 
 export interface IUserService {
 	create(data: UserDTO): Promise<UserEntity>;

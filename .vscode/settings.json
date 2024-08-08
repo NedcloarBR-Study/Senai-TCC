@@ -1,5 +1,17 @@
 {
-	"cSpell.words": ["biomejs", "fastify", "Fastify", "nestjs"],
+	"cSpell.words": [
+		"Adapter",
+		"biomejs",
+		"fastify",
+		"Fastify",
+		"interceptors",
+		"Interceptors",
+		"ndix",
+		"NDIX",
+		"Nest",
+		"nestjs",
+		"ultrasecretpassword"
+	],
 	"search.exclude": {
 		"**/.yarn": true,
 		"**/.pnp.*": true,

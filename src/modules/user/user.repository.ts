@@ -14,7 +14,8 @@ export class UserRepository implements IUserRepository {
 	}
 
 	public async findByPublicId(publicId: string): Promise<UserEntity> {
-		const user = await this.prisma.user.findFirst({
+		console.log(publicId);
+		const user = await this.prisma.user.findFirstOrThrow({
 			where: {
 				publicId,
 			},
@@ -24,7 +25,7 @@ export class UserRepository implements IUserRepository {
 	}
 
 	public async findByDocument(document: string): Promise<UserEntity> {
-		const user = await this.prisma.user.findFirst({
+		const user = await this.prisma.user.findFirstOrThrow({
 			where: {
 				document,
 			},
@@ -34,7 +35,7 @@ export class UserRepository implements IUserRepository {
 	}
 
 	public async findByEmail(email: string): Promise<UserEntity> {
-		const user = await this.prisma.user.findFirst({
+		const user = await this.prisma.user.findFirstOrThrow({
 			where: {
 				email,
 			},
