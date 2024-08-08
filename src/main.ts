@@ -1,7 +1,10 @@
 import { Logger, ValidationPipe } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
 import { HttpAdapterHost, NestFactory } from "@nestjs/core";
-import { FastifyAdapter, type NestFastifyApplication } from "@nestjs/platform-fastify";
+import {
+	FastifyAdapter,
+	type NestFastifyApplication,
+} from "@nestjs/platform-fastify";
 import { DocumentBuilder, SwaggerModule } from "@nestjs/swagger";
 import { PrismaClientExceptionFilter } from "nestjs-prisma";
 import { AppModule } from "./app.module";
@@ -9,14 +12,20 @@ import { HttpExceptionFilter } from "./common/filters";
 import { HttpInterceptor } from "./common/interceptors";
 
 async function bootstrap() {
-	const app = await NestFactory.create<NestFastifyApplication>(AppModule, new FastifyAdapter());
+	const app = await NestFactory.create<NestFastifyApplication>(
+		AppModule,
+		new FastifyAdapter(),
+	);
 	const logger = new Logger("main");
 	const configModule = app.get<ConfigService>(ConfigService);
 	const PORT = configModule.getOrThrow<number>("PORT");
 
 	const { httpAdapter } = app.get(HttpAdapterHost);
 
-	app.useGlobalFilters(new HttpExceptionFilter(), new PrismaClientExceptionFilter(httpAdapter));
+	app.useGlobalFilters(
+		new HttpExceptionFilter(),
+		new PrismaClientExceptionFilter(httpAdapter),
+	);
 	app.useGlobalInterceptors(new HttpInterceptor());
 	app.useGlobalPipes(
 		new ValidationPipe({
@@ -32,8 +41,7 @@ async function bootstrap() {
 	const swaggerConfig = new DocumentBuilder()
 		.setTitle("NDIX")
 		.setDescription("The API Documentation")
-		.setVersion("1.0")
-		.addTag("api")
+		.setVersion("1.1.0")
 		.build();
 
 	const swaggerDocument = SwaggerModule.createDocument(app, swaggerConfig);
