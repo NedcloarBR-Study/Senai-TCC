@@ -32,7 +32,6 @@ jobs:
         run: |
           mkdir -p tests/coverage
           cp -r tests/coverage/lcov-report/* tests/coverage/
-          mv tests/coverage/lcov.info tests/coverage/
           rm -rf tests/coverage/lcov-report
           git add tests/coverage
 
