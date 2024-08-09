@@ -36,14 +36,13 @@ jobs:
           
       - name: Setup files
         run: |
-          mkdir -p ../coverage/client
+          mkdir -p ../coverage/
           mv index.html ../coverage
-          mv src/test/coverage/lcov-report/** ../coverage/client
-          mv src/test/coverage/lcov.info ../coverage/client
+          mv src/test/coverage/lcov-report/** ../coverage/
+          mv src/test/coverage/lcov.info ../coverage/
           git rm -rf .
           git clean -f -d
-          mv ../coverage/client .
-          mv ../coverage/index.html .
+          mv ../coverage/ .
 
       - name: Create Pull Request
         id: "open-pr"
