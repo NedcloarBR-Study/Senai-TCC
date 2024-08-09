@@ -56,6 +56,13 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           pull-request-number: ${{ steps.open-pr.outputs.pull-request-number }}
+      
+      - name: Lock Pull Request
+        uses: sudo-bot/action-pull-request-lock@v1.1.0
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          number: ${{ steps.open-pr.outputs.pull-request-number }}
+          lock-reason: resolved
 
       - name: "Delete PR Branch"
         run: git push origin --delete test/actions/coverage-report
