@@ -206,6 +206,7 @@ describe("UserModule Tests", () => {
 		const { expected: userData } = await userMockInput();
 		const users: UserEntity[] = [];
 		const mockReturn = [];
+
 		for (let i = 0; i < 10; i++) {
 			mockReturn.push(userData.data);
 			users.push({ ...userData.data });
