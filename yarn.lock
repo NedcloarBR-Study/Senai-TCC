@@ -4004,6 +4004,7 @@ __metadata:
     typescript: "npm:^5.5.4"
     validation-br: "npm:^1.4.5"
     vitest: "npm:^2.0.5"
+    vitest-mock-extended: "npm:^2.0.0"
   languageName: unknown
   linkType: soft
 
@@ -5276,6 +5277,18 @@ __metadata:
   languageName: node
   linkType: hard
 
+"ts-essentials@npm:>=10.0.0":
+  version: 10.0.1
+  resolution: "ts-essentials@npm:10.0.1"
+  peerDependencies:
+    typescript: ">=4.5.0"
+  peerDependenciesMeta:
+    typescript:
+      optional: true
+  checksum: 10c0/bc412ae9dafc97a7ab51c63743628d58cc9e7f4f7449d8c89ccb04f50502d04c3dd35a6dea94dbaab2845b856f198a8eb2e8d93e897218d1eb810ca826c1b080
+  languageName: node
+  linkType: hard
+
 "ts-loader@npm:^9.5.1":
   version: 9.5.1
   resolution: "ts-loader@npm:9.5.1"
@@ -5557,6 +5570,18 @@ __metadata:
   bin:
     vite: bin/vite.js
   checksum: 10c0/a796872e1d11875d994615cd00da185c80eeb7753034d35c096050bf3c269c02004070cf623c5fe2a4a90ea2f12488e6f9d13933ec810f117f1b931e1b5e3385
+  languageName: node
+  linkType: hard
+
+"vitest-mock-extended@npm:^2.0.0":
+  version: 2.0.0
+  resolution: "vitest-mock-extended@npm:2.0.0"
+  dependencies:
+    ts-essentials: "npm:>=10.0.0"
+  peerDependencies:
+    typescript: 3.x || 4.x || 5.x
+    vitest: ">=2.0.0"
+  checksum: 10c0/5129f5c9d8cf7e1c9ec3c8cbf24668a795ed9a4c2acb4693190f00a2b1c92ae67dcfe02cb8d7f8fc4eab42b7c533cf1427959de03ce5806d14a651bf6910c8c9
   languageName: node
   linkType: hard
 
