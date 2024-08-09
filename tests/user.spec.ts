@@ -212,6 +212,7 @@ describe("UserModule Tests", () => {
 		}
 		prismaMock.user.findMany.mockResolvedValue(mockReturn);
 		prismaMock.user.count.mockResolvedValue(10);
+
 		const result = await userController.list();
 		const expected = {
 			count: users.length,
