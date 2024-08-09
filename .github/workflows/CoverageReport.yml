@@ -30,10 +30,14 @@ jobs:
           
       - name: Setup coverage files
         run: |
-          mkdir -p tests/coverage
-          cp -r tests/coverage/lcov-report/* tests/coverage/
+          mkdir -p ../coverage
+          cp -r tests/coverage/lcov-report/* ../coverage/
+          cp tests/coverage/lcov.info ../coverage/
           rm -rf tests/coverage/lcov-report
-          git add tests/coverage
+          rm -rf *
+          mv ../coverage/* .
+          rmdir ../coverage
+          git add .
 
       - name: Create Pull Request
         id: "open-pr"
