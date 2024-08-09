@@ -48,12 +48,15 @@ describe("UserModule Tests", () => {
 		it("userController", () => {
 			expect(userController).toBeDefined();
 		});
+
 		it("userService", () => {
 			expect(userService).toBeDefined();
 		});
+
 		it("userRepository", () => {
 			expect(userRepository).toBeDefined();
 		});
+
 		it("prismaMock", () => {
 			expect(prismaMock).toBeDefined();
 		});
