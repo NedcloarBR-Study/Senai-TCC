@@ -210,6 +210,7 @@ describe("UserModule Tests", () => {
 			mockReturn.push(userData.data);
 			users.push({ ...userData.data });
 		}
+
 		prismaMock.user.findMany.mockResolvedValue(mockReturn);
 		prismaMock.user.count.mockResolvedValue(10);
 
