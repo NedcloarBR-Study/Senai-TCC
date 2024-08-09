@@ -1,11 +1,6 @@
 name: Generate Coverage PR
 
 on:
-  push:
-    branches:
-      - master
-    paths:
-      - "**/*.spec.ts"
   workflow_run:
     workflows: ["Run Tests"]
     types:
