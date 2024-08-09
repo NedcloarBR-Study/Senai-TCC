@@ -88,6 +88,7 @@ describe("UserModule Tests", () => {
 					},
 				),
 			);
+
 			try {
 				await userController.create(rawInput);
 			} catch (error) {
