@@ -37,8 +37,8 @@ jobs:
       - name: Setup files
         run: |
           mkdir -p ../coverage/
-          mv test/coverage/lcov-report/** ../coverage/
-          mv test/coverage/lcov.info ../coverage/
+          mv tests/coverage/lcov-report/** ../coverage/
+          mv tests/coverage/lcov.info ../coverage/
           git rm -rf .
           git clean -f -d
           mv ../coverage/ .
