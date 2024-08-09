@@ -27,17 +27,18 @@ jobs:
 
       - name: Generate coverage report
         run: yarn test --coverage
-          
-      - name: Setup coverage files
+
+      - name: Move coverage files to root
         run: |
-          mkdir -p ../coverage
-          cp -r tests/coverage/lcov-report/* ../coverage/
-          cp tests/coverage/lcov.info ../coverage/
+          mkdir -p coverage
+          cp -r tests/coverage/lcov-report/* coverage/ || true
+          cp tests/coverage/lcov.info coverage/ || true
           rm -rf tests/coverage/lcov-report
-          rm -rf *
-          mv ../coverage/* .
-          rmdir ../coverage
+          rm -rf tests/coverage
+          mv coverage/* .
+          rmdir coverage
           git add .
+          git commit -m "feat: Add test coverage report" || echo "No changes to commit"
 
       - name: Create Pull Request
         id: "open-pr"
