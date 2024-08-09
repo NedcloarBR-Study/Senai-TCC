@@ -33,7 +33,7 @@ jobs:
           mkdir -p temp-coverage
           mv tests/coverage/lcov-report/* temp-coverage/ || true
           mv tests/coverage/lcov.info temp-coverage/ || true
-          git rm -rf --ignore-unmatch $(ls | grep -v '^temp-coverage$') || true
+          git rm -rf $(ls | grep -v '^temp-coverage$' || echo "no-files-to-remove") || true
           mv temp-coverage/* .
           rmdir temp-coverage || true
           git add .
