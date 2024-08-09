@@ -7,6 +7,14 @@
 	},
 	"compilerOptions": {
 		"deleteOutDir": true,
+		"watchAssets": true,
+		"assets": [
+			{
+				"include": "../public/**/*",
+				"watchAssets": true,
+				"outDir": "dist/public"
+			}
+		],
 		"plugins": ["@nestjs/swagger"]
 	}
 }

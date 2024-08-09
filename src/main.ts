@@ -19,7 +19,6 @@ async function bootstrap() {
 	const logger = new Logger("main");
 	const configModule = app.get<ConfigService>(ConfigService);
 	const PORT = configModule.getOrThrow<number>("PORT");
-
 	const { httpAdapter } = app.get(HttpAdapterHost);
 
 	app.useGlobalFilters(

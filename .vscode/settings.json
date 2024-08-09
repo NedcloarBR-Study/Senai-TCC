@@ -6,6 +6,7 @@
 		"Fastify",
 		"interceptors",
 		"Interceptors",
+		"lcov",
 		"ndix",
 		"NDIX",
 		"Nest",

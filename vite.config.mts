@@ -4,13 +4,15 @@ import { defineConfig } from "vitest/config";
 export default defineConfig({
 	plugins: [],
 	test: {
+		watch: false,
 		deps: {
 			interopDefault: true,
 		},
 		environment: "node",
 		coverage: {
 			provider: "v8",
-			reporter: ["text", "html"],
+			reporter: ["text", "html", "lcov"],
+			reportsDirectory: "public/coverage",
 		},
 		reporters: "default",
 		include: ["**/*.spec.ts"],

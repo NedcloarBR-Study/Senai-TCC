@@ -6,6 +6,7 @@ export default defineConfig(({ mode }) => {
 	Object.assign(process.env, loadEnv(mode, process.cwd(), ""));
 
 	return {
+		watch: false,
 		plugins: [],
 		test: {
 			deps: {
@@ -14,7 +15,8 @@ export default defineConfig(({ mode }) => {
 			environment: "node",
 			coverage: {
 				provider: "v8",
-				reporter: ["text", "html"],
+				reporter: ["text", "html", "lcov"],
+				reportsDirectory: "public/coverage",
 			},
 			reporters: "default",
 			include: ["**/*.e2e-spec.ts"],
