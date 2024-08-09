@@ -27,14 +27,13 @@ jobs:
 
       - name: Generate coverage report
         run: yarn test --coverage
-        
+          
       - name: Setup coverage files
         run: |
-          mkdir -p ../coverage/
-          mv tests/coverage/lcov-report/* ../coverage/
-          mv tests/coverage/lcov.info ../coverage/
-          rm -rf tests/coverage
-          mv ../coverage/* tests/coverage/
+          mkdir -p tests/coverage
+          mv tests/coverage/lcov-report/* tests/coverage/
+          mv tests/coverage/lcov.info tests/coverage/
+          rm -rf tests/coverage/lcov-report
           git add tests/coverage
 
       - name: Create Pull Request
