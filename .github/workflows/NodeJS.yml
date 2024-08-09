@@ -7,9 +7,13 @@ on:
   push:
     branches: [master]
     paths: "**/*.ts"
+    paths-ignore:
+      - '**/*.spec.ts'
   pull_request:
     branches: [master]
     paths: "**/*.ts"
+    paths-ignore:
+      - '**/*.spec.ts'
 
 
 jobs:
