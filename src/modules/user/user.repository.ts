@@ -24,6 +24,10 @@ export class UserRepository implements IUserRepository {
 			where: {
 				publicId,
 			},
+			include: {
+				receivedTransactions: true,
+				sentTransactions: true,
+			},
 		});
 
 		return (await this.safeQuery("Single", user)) as UserEntity;
@@ -33,6 +37,10 @@ export class UserRepository implements IUserRepository {
 		const user = await this.prisma.client.user.findFirstOrThrow({
 			where: {
 				document,
+			},
+			include: {
+				receivedTransactions: true,
+				sentTransactions: true,
 			},
 		});
 
@@ -44,14 +52,34 @@ export class UserRepository implements IUserRepository {
 			where: {
 				email,
 			},
+			include: {
+				receivedTransactions: true,
+				sentTransactions: true,
+			},
 		});
 
 		return (await this.safeQuery("Single", user)) as UserEntity;
 	}
 
 	public async findMany(): Promise<UserEntity[]> {
-		const users = await this.prisma.client.user.findMany();
+		const users = await this.prisma.client.user.findMany({
+			include: {
+				receivedTransactions: true,
+				sentTransactions: true,
+			},
+		});
 		return (await this.safeQuery("All", users)) as UserEntity[];
+	}
+
+	public async update(document: string, money: number): Promise<UserEntity> {
+		return await this.prisma.client.user.update({
+			where: {
+				document,
+			},
+			data: {
+				money,
+			},
+		});
 	}
 
 	public async count(): Promise<number> {

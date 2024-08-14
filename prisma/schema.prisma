@@ -8,15 +8,17 @@ datasource db {
 }
 
 model user {
-  id        Int      @id @default(autoincrement())
-  publicId  String   @unique @default(uuid()) @map("public_id")
-  firstName String   @map("first_name") @db.VarChar(50)
-  lastName  String   @map("last_name") @db.VarChar(100)
-  document  String   @unique
-  email     String   @unique @db.VarChar(255)
-  password  String
-  userType  UserType @map("user_type")
-  money     Float    @default(0)
+  id                   Int           @id @default(autoincrement())
+  publicId             String        @unique @default(uuid()) @map("public_id")
+  firstName            String        @map("first_name") @db.VarChar(50)
+  lastName             String        @map("last_name") @db.VarChar(100)
+  document             String        @unique
+  email                String        @unique @db.VarChar(255)
+  password             String
+  userType             UserType      @map("user_type")
+  money                Float         @default(0)
+  sentTransactions     transaction[] @relation("sender")
+  receivedTransactions transaction[] @relation("receiver")
 
   @@map("users")
 }
@@ -24,4 +26,16 @@ model user {
 enum UserType {
   CPF
   CNPJ
+}
+
+model transaction {
+  id         String   @id @default(uuid())
+  value      Int
+  timestamp  DateTime @default(now())
+  sender     user?    @relation(name: "sender", fields: [senderId], references: [publicId])
+  senderId   String?
+  receiver   user?    @relation(name: "receiver", fields: [receiverId], references: [publicId])
+  receiverId String?
+
+  @@map("transactions")
 }

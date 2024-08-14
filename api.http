@@ -33,13 +33,27 @@ Content-Type: application/json
 }
 
 ### Document
-# GET http://localhost:9900/api/users/document/CPForCNPJ
+GET http://localhost:9900/api/users/document/CPForCNPJ
 
 ### Email
-# GET http://localhost:9900/api/users/email/email@email.com
+GET http://localhost:9900/api/users/email/email@email.com
 
 ### PublicID
 GET http://localhost:9900/api/users/UUID
 
 ### List
 GET http://localhost:9900/api/users/list
+
+# TRANSACTION
+### Route
+GET http://localhost:9900/api/transactions
+
+### Create
+POST http://localhost:9900/api/transactions
+
+Content-Type: application/json
+{
+  "value": 0.01,
+  "senderDocument": "CPF",
+  "receiverDocument": "CPF | CNPJ"
+}

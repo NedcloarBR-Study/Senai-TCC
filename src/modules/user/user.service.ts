@@ -6,7 +6,9 @@ import { UserDTO } from "./user.dto";
 
 @Injectable()
 export class UserService implements IUserService {
-	public constructor(@Inject(Repositories.User) private readonly userRepository: IUserRepository) {}
+	public constructor(
+		@Inject(Repositories.User) private readonly userRepository: IUserRepository,
+	) {}
 
 	public async create(data: UserDTO): Promise<UserEntity> {
 		const hashedData = await this.hashData(data);
@@ -27,6 +29,10 @@ export class UserService implements IUserService {
 
 	public async findMany(): Promise<UserEntity[]> {
 		return await this.userRepository.findMany();
+	}
+
+	public async update(document: string, money: number): Promise<UserEntity> {
+		return await this.userRepository.update(document, money);
 	}
 
 	public async count(): Promise<number> {

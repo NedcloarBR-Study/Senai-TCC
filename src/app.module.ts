@@ -3,7 +3,7 @@ import { Module } from "@nestjs/common";
 import { ConfigModule } from "@nestjs/config";
 import { ServeStaticModule } from "@nestjs/serve-static";
 import { CustomPrismaModule } from "nestjs-prisma";
-import { UserModule } from "./modules";
+import { TransactionModule, UserModule } from "./modules";
 import { extendedPrismaClient } from "./modules/database/ExtendedPrismaClient";
 import { Services } from "./types/constants";
 
@@ -25,6 +25,7 @@ import { Services } from "./types/constants";
 			isGlobal: true,
 		}),
 		UserModule,
+		TransactionModule,
 	],
 })
 export class AppModule {}

@@ -9,7 +9,10 @@ import { DocumentBuilder, SwaggerModule } from "@nestjs/swagger";
 import { PrismaClientExceptionFilter } from "nestjs-prisma";
 import { AppModule } from "./app.module";
 import { HttpExceptionFilter } from "./common/filters";
-import { HttpInterceptor } from "./common/interceptors";
+import {
+	HttpInterceptor,
+	UnauthorizedInterceptor,
+} from "./common/interceptors";
 
 async function bootstrap() {
 	const app = await NestFactory.create<NestFastifyApplication>(
@@ -25,7 +28,10 @@ async function bootstrap() {
 		new HttpExceptionFilter(),
 		new PrismaClientExceptionFilter(httpAdapter),
 	);
-	app.useGlobalInterceptors(new HttpInterceptor());
+	app.useGlobalInterceptors(
+		new HttpInterceptor(),
+		new UnauthorizedInterceptor(),
+	);
 	app.useGlobalPipes(
 		new ValidationPipe({
 			always: true,

@@ -1,0 +1,47 @@
+import { Inject, Injectable } from "@nestjs/common";
+import { UnauthorizedError } from "src/common/errors";
+import { Repositories, Services } from "src/types/constants";
+import type {
+	ITransactionRepository,
+	ITransactionService,
+	TransactionEntity,
+} from ".";
+import type { IUserService } from "../user";
+import { TransactionDTO } from "./transaction.dto";
+
+@Injectable()
+export class TransactionService implements ITransactionService {
+	constructor(
+		@Inject(Repositories.Transaction)
+		private readonly transactionRepository: ITransactionRepository,
+		@Inject(Services.User) private readonly userService: IUserService,
+	) {}
+
+	public async create(data: TransactionDTO): Promise<TransactionEntity> {
+		const sender = await this.userService.findByDocument(data.senderDocument);
+		const receiver = await this.userService.findByDocument(
+			data.receiverDocument,
+		);
+
+		if (sender.money < data.value) {
+			throw new UnauthorizedError("Sender não tem dinheiro o suficiente");
+		}
+
+		if (sender.userType === "CNPJ") {
+			throw new UnauthorizedError("CNPJ não pode enviar");
+		}
+
+		if (receiver.document === sender.document) {
+			throw new UnauthorizedError("Não é possível enviar para si mesmo");
+		}
+
+		const transaction = await this.transactionRepository.create(data);
+		await this.userService.update(sender.document, sender.money - data.value);
+		await this.userService.update(
+			receiver.document,
+			receiver.money + data.value,
+		);
+
+		return transaction;
+	}
+}
