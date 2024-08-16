@@ -176,8 +176,8 @@ describe("UserModule Tests", () => {
 
 	describe("GET /", async () => {
 		let publicId: string;
-		it("should get a user using CNPJ", async () => {
-			publicId = "nedcloar1@hotmail.com";
+		it("should get a user using publicId", async () => {
+			publicId = "0a8ee1f5-1373-4767-9389-f76abf22bf4f";
 			const { expected, mockInput } = await userMockInput();
 
 			prismaMock.user.findFirstOrThrow.mockResolvedValue(mockInput);
