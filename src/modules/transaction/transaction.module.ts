@@ -1,9 +1,9 @@
 import { Module, Provider } from "@nestjs/common";
 import { Repositories, Services } from "src/types/constants";
 import {
+	TransactionController,
 	TransactionRepository,
 	TransactionService,
-	TransactionsController,
 } from ".";
 import { UserModule } from "../user/user.module";
 
@@ -20,7 +20,7 @@ const dependencies: Provider[] = [
 
 @Module({
 	imports: [UserModule],
-	controllers: [TransactionsController],
+	controllers: [TransactionController],
 	providers: [...dependencies],
 	exports: [...dependencies],
 })

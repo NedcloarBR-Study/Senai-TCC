@@ -4,7 +4,7 @@ import type { ITransactionService, TransactionEntity } from ".";
 import { TransactionDTO } from "./transaction.dto";
 
 @Controller(Routes.Transaction)
-export class TransactionsController {
+export class TransactionController {
 	constructor(
 		@Inject(Services.Transaction)
 		private readonly service: ITransactionService,
