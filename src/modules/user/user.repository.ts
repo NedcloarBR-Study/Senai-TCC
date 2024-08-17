@@ -19,7 +19,6 @@ export class UserRepository implements IUserRepository {
 	}
 
 	public async findByPublicId(publicId: string): Promise<UserEntity> {
-		console.log(publicId);
 		const user = await this.prisma.client.user.findFirstOrThrow({
 			where: {
 				publicId,
