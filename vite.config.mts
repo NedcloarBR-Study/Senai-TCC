@@ -12,7 +12,7 @@ export default defineConfig({
 		coverage: {
 			provider: "v8",
 			reporter: ["text", "html", "lcov"],
-			reportsDirectory: "tests/coverage",
+			reportsDirectory: "test/coverage",
 		},
 		reporters: "default",
 		include: ["**/*.spec.ts"],
