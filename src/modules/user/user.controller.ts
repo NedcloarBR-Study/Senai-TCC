@@ -17,8 +17,9 @@ import {
 	ApiResponse,
 	ApiTags,
 } from "@nestjs/swagger";
+import { plainToClass } from "class-transformer";
 import { Routes, Services } from "src/types/constants";
-import type { IUserService, UserEntity } from ".";
+import { IUserService, UserEntity } from ".";
 import { UserDTO, UserDocumentDTO, UserEmailDTO } from "./user.dto";
 
 @Controller(Routes.User)
@@ -42,11 +43,11 @@ export class UserController {
 	@ApiConflictResponse({
 		description: "Already exists an User with this email or document",
 	})
-	public async create(@Body() data: UserDTO) {
+	public async create(@Body() data: UserDTO): Promise<{ data: UserEntity }> {
 		const user = await this.userService.create(data);
 
 		return {
-			data: user,
+			data: plainToClass(UserEntity, user),
 		};
 	}
 
@@ -63,7 +64,7 @@ export class UserController {
 		const user = await this.userService.findByDocument(document);
 
 		return {
-			data: user,
+			data: plainToClass(UserEntity, user),
 		};
 	}
 
@@ -80,7 +81,7 @@ export class UserController {
 		const user = await this.userService.findByEmail(email);
 
 		return {
-			data: user,
+			data: plainToClass(UserEntity, user),
 		};
 	}
 
@@ -98,7 +99,7 @@ export class UserController {
 		const user = await this.userService.findByPublicId(id);
 
 		return {
-			data: user,
+			data: plainToClass(UserEntity, user),
 		};
 	}
 
@@ -113,7 +114,7 @@ export class UserController {
 
 		return {
 			count: await this.userService.count(),
-			data: users,
+			data: users.map((user) => plainToClass(UserEntity, user)),
 		};
 	}
 }
