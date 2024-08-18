@@ -30,10 +30,6 @@ export class TransactionRepository implements ITransactionRepository {
 
 		return await this.prisma.client.transaction.create({
 			data: _data,
-			include: {
-				receiver: true,
-				sender: true,
-			},
 		});
 	}
 }
