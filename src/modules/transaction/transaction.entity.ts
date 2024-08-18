@@ -1,6 +1,6 @@
-import type { transaction } from "@prisma/client";
+import type { Transaction } from "@prisma/client";
 
-export class TransactionEntity implements transaction {
+export class TransactionEntity implements Transaction {
 	public readonly id: string;
 
 	public readonly value: number;

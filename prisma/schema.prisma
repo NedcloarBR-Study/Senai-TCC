@@ -7,7 +7,7 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model user {
+model User {
   id                   Int           @id @default(autoincrement())
   publicId             String        @unique @default(uuid()) @map("public_id")
   firstName            String        @map("first_name") @db.VarChar(50)
@@ -17,8 +17,8 @@ model user {
   password             String
   userType             UserType      @map("user_type")
   money                Float         @default(0)
-  sentTransactions     transaction[] @relation("sender")
-  receivedTransactions transaction[] @relation("receiver")
+  sentTransactions     Transaction[] @relation("sender")
+  receivedTransactions Transaction[] @relation("receiver")
 
   @@map("users")
 }
@@ -28,13 +28,13 @@ enum UserType {
   CNPJ
 }
 
-model transaction {
+model Transaction {
   id         String   @id @default(uuid())
   value      Int
   timestamp  DateTime @default(now())
-  sender     user?    @relation(name: "sender", fields: [senderId], references: [publicId])
+  sender     User?    @relation(name: "sender", fields: [senderId], references: [publicId])
   senderId   String?
-  receiver   user?    @relation(name: "receiver", fields: [receiverId], references: [publicId])
+  receiver   User?    @relation(name: "receiver", fields: [receiverId], references: [publicId])
   receiverId String?
 
   @@map("transactions")
