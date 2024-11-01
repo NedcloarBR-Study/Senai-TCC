@@ -17,7 +17,7 @@ async function bootstrap(): Promise<void> {
 	const configModule = app.get<ConfigService>(ConfigService);
 	const PORT = configModule.getOrThrow<number>("PORT");
 	
-    configureFastify(app);
+  configureFastify(app);
 	configureGlobals(app);
 	createSwagger(app);
 
