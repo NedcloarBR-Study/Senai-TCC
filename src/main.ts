@@ -1,20 +1,14 @@
-import { Logger, ValidationPipe } from "@nestjs/common";
+import { Logger } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
-import { HttpAdapterHost, NestFactory } from "@nestjs/core";
+import { NestFactory } from "@nestjs/core";
 import {
 	FastifyAdapter,
 	type NestFastifyApplication,
 } from "@nestjs/platform-fastify";
-import { DocumentBuilder, SwaggerModule } from "@nestjs/swagger";
-import { PrismaClientExceptionFilter } from "nestjs-prisma";
 import { AppModule } from "./app.module";
-import { HttpExceptionFilter } from "./common/filters";
-import {
-	HttpInterceptor,
-	UnauthorizedInterceptor,
-} from "./common/interceptors";
+import { configureFastify, configureGlobals, createSwagger } from "./lib";
 
-async function bootstrap() {
+async function bootstrap(): Promise<void> {
 	const app = await NestFactory.create<NestFastifyApplication>(
 		AppModule,
 		new FastifyAdapter(),
@@ -22,35 +16,10 @@ async function bootstrap() {
 	const logger = new Logger("main");
 	const configModule = app.get<ConfigService>(ConfigService);
 	const PORT = configModule.getOrThrow<number>("PORT");
-	const { httpAdapter } = app.get(HttpAdapterHost);
-
-	app.useGlobalFilters(
-		new HttpExceptionFilter(),
-		new PrismaClientExceptionFilter(httpAdapter),
-	);
-	app.useGlobalInterceptors(
-		new HttpInterceptor(),
-		new UnauthorizedInterceptor(),
-	);
-	app.useGlobalPipes(
-		new ValidationPipe({
-			always: true,
-			forbidNonWhitelisted: true,
-			whitelist: true,
-			transform: true,
-		}),
-	);
-
-	app.setGlobalPrefix("api");
-
-	const swaggerConfig = new DocumentBuilder()
-		.setTitle("NDIX")
-		.setDescription("The API Documentation")
-		.setVersion("1.1.0")
-		.build();
-
-	const swaggerDocument = SwaggerModule.createDocument(app, swaggerConfig);
-	SwaggerModule.setup("docs", app, swaggerDocument);
+	
+    configureFastify(app);
+	configureGlobals(app);
+	createSwagger(app);
 
 	try {
 		await app.listen(PORT, "0.0.0.0");
