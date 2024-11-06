@@ -1,8 +1,24 @@
 {
 	"name": "@senai-tcc/source",
-	"workspaces": [
-		"apps/*"
-	],
+	"version": "1.0.0",
+	"description": "An system similar to PIX",
+	"author": {
+		"name": "Miguel Alexandre Uhlein <NedcloarBR>",
+		"email": "nedcloar1@hotmail.com"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/NedcloarBR/NDIX.git"
+	},
+	"bugs": {
+		"url": "https://github.com/NedcloarBR/NDIX/issues"
+	},
+	"private": true,
+	"license": "MIT",
+	"workspaces": ["apps/*"],
+	"engines": {
+		"node": "20.9.0"
+	},
 	"packageManager": "yarn@4.5.1",
 	"scripts": {
 		"start:dev": "turbo run start:dev"
