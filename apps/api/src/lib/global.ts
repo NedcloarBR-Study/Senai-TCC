@@ -3,17 +3,20 @@ import { HttpAdapterHost } from "@nestjs/core";
 import { NestFastifyApplication } from "@nestjs/platform-fastify";
 import { PrismaClientExceptionFilter } from "nestjs-prisma";
 import { HttpExceptionFilter } from "src/common/filters";
-import { HttpInterceptor, UnauthorizedInterceptor } from "src/common/interceptors";
+import {
+	HttpInterceptor,
+	UnauthorizedInterceptor,
+} from "src/common/interceptors";
 
 export function configureGlobals(app: NestFastifyApplication): void {
-    const { httpAdapter } = app.get(HttpAdapterHost);
+	const { httpAdapter } = app.get(HttpAdapterHost);
 
 	app.useGlobalFilters(
 		new HttpExceptionFilter(),
 		new PrismaClientExceptionFilter(httpAdapter),
 	);
 
-    app.useGlobalInterceptors(
+	app.useGlobalInterceptors(
 		new HttpInterceptor(),
 		new UnauthorizedInterceptor(),
 	);
@@ -25,5 +28,5 @@ export function configureGlobals(app: NestFastifyApplication): void {
 			transform: true,
 		}),
 	);
-    app.setGlobalPrefix("api");
+	app.setGlobalPrefix("api");
 }

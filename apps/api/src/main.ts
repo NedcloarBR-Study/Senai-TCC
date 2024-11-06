@@ -6,7 +6,12 @@ import {
 	type NestFastifyApplication,
 } from "@nestjs/platform-fastify";
 import { AppModule } from "./app.module";
-import { configureFastify, configureGlobals, createSwagger } from "./lib";
+import {
+	configureApp,
+	configureFastify,
+	configureGlobals,
+	createSwagger,
+} from "./lib";
 
 async function bootstrap(): Promise<void> {
 	const app = await NestFactory.create<NestFastifyApplication>(
@@ -16,8 +21,9 @@ async function bootstrap(): Promise<void> {
 	const logger = new Logger("main");
 	const configModule = app.get<ConfigService>(ConfigService);
 	const PORT = configModule.getOrThrow<number>("PORT");
-	
-  configureFastify(app);
+
+	configureApp(app);
+	configureFastify(app);
 	configureGlobals(app);
 	createSwagger(app);
 
