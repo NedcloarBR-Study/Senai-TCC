@@ -34,4 +34,4 @@ jobs:
         run: cd apps/api && yarn install --immutable
 
       - name: Install mobile dependencies
-        run: cd ../mobile && yarn install --immutable
+        run: cd apps/mobile && yarn install --immutable
