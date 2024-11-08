@@ -1,7 +1,7 @@
 import { NestFastifyApplication } from "@nestjs/platform-fastify";
 import { DocumentBuilder, SwaggerModule } from "@nestjs/swagger";
 
-export function createSwagger(app: NestFastifyApplication): void {
+export function configureSwagger(app: NestFastifyApplication): void {
 	const swaggerConfig = new DocumentBuilder()
 		.setTitle("NDIX")
 		.setDescription("The API Documentation")

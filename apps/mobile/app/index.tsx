@@ -1,15 +1,15 @@
 import { useState } from "react";
-import { Button, Text, TextInput, ToastAndroid, View,I18nManager } from "react-native";
+import { Button, Text, TextInput, ToastAndroid, View } from "react-native";
 
 export default function Index() {
 	const [loginValue, setLoginValue] = useState<string>("");
 	const [passwordValue, setPasswordValue] = useState<string>("");
 
 	function handleSetPasswordValue(value: string) {
-		const numericValue = value.replace(/[^0-9]/g, "");
+		const numericValue = value.replace(/\D/g, "");
 		setPasswordValue(numericValue);
-  }
-  
+	}
+
 	function onPress() {
 		if (loginValue === "admin" && passwordValue === "123") {
 			ToastAndroid.show("Logado com sucesso!", ToastAndroid.SHORT);
