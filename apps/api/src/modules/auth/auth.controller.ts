@@ -1,4 +1,13 @@
-import { Body, Controller, Get, Post, UseGuards } from "@nestjs/common";
+import {
+	Body,
+	Controller,
+	Get,
+	HttpStatus,
+	Post,
+	Res,
+	UseGuards,
+} from "@nestjs/common";
+import type { FastifyReply } from "fastify";
 import { AuthUser } from "src/common/decorators/AuthUser.decorator";
 import { JwtAuthGuard } from "src/common/guards/jwt.guard";
 import type { UserEntity } from "../user";
@@ -12,10 +21,13 @@ export class AuthController {
 	public constructor(private readonly authService: AuthService) {}
 
 	@Post("login")
-	public async login(@Body() userLoginDTO: UserLoginDTO): Promise<string> {
+	public async login(
+		@Body() userLoginDTO: UserLoginDTO,
+		@Res() res: FastifyReply,
+	): Promise<string> {
 		const user = await this.authService.validateUser(userLoginDTO);
 		const jwt = await this.authService.login({ publicId: user.publicId });
-		return jwt;
+		return res.status(HttpStatus.FOUND).send({ token: jwt });
 	}
 
 	@Get("status")

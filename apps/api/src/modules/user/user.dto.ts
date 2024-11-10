@@ -5,10 +5,8 @@ import {
 	IsEmail,
 	IsEnum,
 	IsNotEmpty,
-	IsOptional,
 	IsString,
 	Length,
-	ValidateIf,
 } from "class-validator";
 import { IsCPFOrCNPJ } from "src/common/decorators/IsCPFOrCNPJ.decorator";
 
