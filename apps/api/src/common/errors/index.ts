@@ -1,1 +1,1 @@
-export * from "./Unauthorized.error";
+export * from "./UserNotFound.error";

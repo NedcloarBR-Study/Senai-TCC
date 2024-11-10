@@ -1,5 +1,4 @@
-import { Inject, Injectable } from "@nestjs/common";
-import { UnauthorizedError } from "src/common/errors";
+import { Inject, Injectable, UnauthorizedException } from "@nestjs/common";
 import { Repositories, Services } from "src/types/constants";
 import type {
 	ITransactionRepository,
@@ -24,15 +23,15 @@ export class TransactionService implements ITransactionService {
 		);
 
 		if (sender.money < data.value) {
-			throw new UnauthorizedError("Sender não tem dinheiro o suficiente");
+			throw new UnauthorizedException("Sender não tem dinheiro o suficiente");
 		}
 
 		if (sender.userType === "CNPJ") {
-			throw new UnauthorizedError("CNPJ não pode enviar");
+			throw new UnauthorizedException("CNPJ não pode enviar");
 		}
 
 		if (receiver.document === sender.document) {
-			throw new UnauthorizedError("Não é possível enviar para si mesmo");
+			throw new UnauthorizedException("Não é possível enviar para si mesmo");
 		}
 
 		const transaction = await this.transactionRepository.create(data);

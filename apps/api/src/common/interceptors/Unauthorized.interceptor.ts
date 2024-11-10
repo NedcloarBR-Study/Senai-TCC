@@ -6,7 +6,6 @@ import {
 	UnauthorizedException,
 } from "@nestjs/common";
 import { type Observable, catchError } from "rxjs";
-import { UnauthorizedError } from "../errors";
 
 @Injectable()
 export class UnauthorizedInterceptor implements NestInterceptor {
@@ -16,7 +15,7 @@ export class UnauthorizedInterceptor implements NestInterceptor {
 	): Observable<unknown> | Promise<Observable<unknown>> {
 		return next.handle().pipe(
 			catchError((error) => {
-				if (error instanceof UnauthorizedError) {
+				if (error instanceof UnauthorizedException) {
 					throw new UnauthorizedException(error.message);
 				}
 				throw error;

@@ -5,8 +5,10 @@ import {
 	IsEmail,
 	IsEnum,
 	IsNotEmpty,
+	IsOptional,
 	IsString,
 	Length,
+	ValidateIf,
 } from "class-validator";
 import { IsCPFOrCNPJ } from "src/common/decorators/IsCPFOrCNPJ.decorator";
 
@@ -78,3 +80,8 @@ export class UserPartialDTO extends PartialType(UserDTO) {}
 export class UserDocumentDTO extends PickType(UserDTO, ["document"] as const) {}
 
 export class UserEmailDTO extends PickType(UserDTO, ["email"] as const) {}
+
+export class UserLoginDTO extends PickType(UserDTO, [
+	"password",
+	"document",
+] as const) {}

@@ -8,5 +8,5 @@ declare module "fastify" {
 }
 
 export interface JwtPayload {
-	id: UserEntity["publicId"];
+	publicId: UserEntity["publicId"];
 }

@@ -1,11 +1,6 @@
-import fastifyHelmet from "@fastify/helmet";
-import { ConfigService } from "@nestjs/config";
 import { NestFastifyApplication } from "@nestjs/platform-fastify";
 
-export function configureFastify(
-	app: NestFastifyApplication,
-	configService: ConfigService,
-): void {
+export function configureFastify(app: NestFastifyApplication): void {
 	const fastifyInstance = app.getHttpAdapter().getInstance();
 	fastifyInstance
 		.addHook("onRequest", async (req, res) => {
@@ -19,5 +14,5 @@ export function configureFastify(
 			this.send("");
 		});
 
-	app.use(fastifyHelmet);
+	app.register(require("@fastify/helmet"));
 }
