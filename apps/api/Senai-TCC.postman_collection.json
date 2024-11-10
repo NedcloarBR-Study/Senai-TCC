@@ -1,0 +1,256 @@
+{
+	"info": {
+		"_postman_id": "ef0ebc3e-334b-481c-b2b1-eadbc0e12cac",
+		"name": "Senai-TCC",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "12180365"
+	},
+	"item": [
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "Health",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BaseURL}}/users",
+							"host": [
+								"{{BaseURL}}"
+							],
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstName\": \"Miguel\",\r\n    \"lastName\": \"Uhlein\",\r\n    \"email\": \"nedcloar1@hotmail.com\",\r\n    \"password\": \"ultrasecretpassword123\",\r\n    \"userType\": \"CPF\",\r\n    \"document\": \"88224505073\" // Not my real CPF\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BaseURL}}/users",
+							"host": [
+								"{{BaseURL}}"
+							],
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get by Document",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BaseURL}}/users/document/88224505073",
+							"host": [
+								"{{BaseURL}}"
+							],
+							"path": [
+								"users",
+								"document",
+								"88224505073"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get by Email",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BaseURL}}/users/email/nedcloar1@hotmail.com",
+							"host": [
+								"{{BaseURL}}"
+							],
+							"path": [
+								"users",
+								"email",
+								"nedcloar1@hotmail.com"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get by ID (public)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BaseURL}}/users/63050ce8-0b3e-4f1b-bfd8-6677183f5e68",
+							"host": [
+								"{{BaseURL}}"
+							],
+							"path": [
+								"users",
+								"63050ce8-0b3e-4f1b-bfd8-6677183f5e68"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BaseURL}}/users/list",
+							"host": [
+								"{{BaseURL}}"
+							],
+							"path": [
+								"users",
+								"list"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"document\": \"88224505073\", // Not my real CPF\r\n    \"password\": \"ultrasecretpassword123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BaseURL}}/auth/login",
+							"host": [
+								"{{BaseURL}}"
+							],
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Status",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXlsb2FkIjp7InB1YmxpY0lkIjoiNjMwNTBjZTgtMGIzZS00ZjFiLWJmZDgtNjY3NzE4M2Y1ZTY4In0sImlhdCI6MTczMTI2OTUyMywiZXhwIjoxNzMxMjczMTIzfQ.3z06zZsgszyzeGXh7byq-uhQ9TRTp9XtimN7rgttA78",
+								"description": "JWT Token",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{BaseURL}}/auth/status",
+							"host": [
+								"{{BaseURL}}"
+							],
+							"path": [
+								"auth",
+								"status"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Transactions",
+			"item": [
+				{
+					"name": "Health",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BaseURL}}/transactions",
+							"host": [
+								"{{BaseURL}}"
+							],
+							"path": [
+								"transactions"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"value\": 0.00,\r\n  \"senderDocument\": \"CPF\",\r\n  \"receiverDocument\": \"CPF | CNPJ\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BaseURL}}/transactions",
+							"host": [
+								"{{BaseURL}}"
+							],
+							"path": [
+								"transactions"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "BaseURL",
+			"value": "http://localhost:9999",
+			"type": "default"
+		}
+	]
+}
