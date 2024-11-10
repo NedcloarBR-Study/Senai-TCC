@@ -1,18 +1,26 @@
 import { useState } from "react";
 import { Button, Text, TextInput, ToastAndroid, View } from "react-native";
+import { loginUser } from "../lib/api";
 
 export default function Index() {
 	const [loginValue, setLoginValue] = useState<string>("");
 	const [passwordValue, setPasswordValue] = useState<string>("");
+	const [user, setUser] = useState<string>("");
 
 	function handleSetPasswordValue(value: string) {
 		const numericValue = value.replace(/\D/g, "");
 		setPasswordValue(numericValue);
 	}
 
-	function onPress() {
+	async function onPress() {
 		if (loginValue === "admin" && passwordValue === "123") {
 			ToastAndroid.show("Logado com sucesso!", ToastAndroid.SHORT);
+			const userLogin = await loginUser({
+				login: loginValue,
+				password: passwordValue,
+			});
+			setUser(userLogin);
+			console.log(user);
 			return;
 		}
 		ToastAndroid.show("Login ou senha inválidos!", ToastAndroid.SHORT);
