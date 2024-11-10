@@ -1,13 +1,14 @@
 import { Inject, Injectable } from "@nestjs/common";
 // biome-ignore lint/style/useImportType: <Cannot useImportType in classes used in Injection>
 import { JwtService } from "@nestjs/jwt";
+import { plainToClass } from "class-transformer";
 import { UserNotFoundError } from "src/common/errors";
 import type { JwtPayload } from "src/types";
 import { Services } from "src/types/constants";
 import { PasswordUtils } from "src/utils/password";
 import type { IAuthService } from ".";
 // biome-ignore lint/style/useImportType: <Cannot useImportType in classes used in Injection or DTOs>
-import { IUserService, type UserEntity, UserLoginDTO } from "../user";
+import { IUserService, UserEntity, UserLoginDTO } from "../user";
 
 @Injectable()
 export class AuthService implements IAuthService {
@@ -19,7 +20,7 @@ export class AuthService implements IAuthService {
 	public async validateUser(details: UserLoginDTO): Promise<UserEntity> {
 		const user = await this.userService.findByDocument(details.document);
 		if (await PasswordUtils.compare(details.password, user.password)) {
-			return user;
+			return plainToClass(UserEntity, user);
 		}
 
 		throw new UserNotFoundError();
@@ -27,7 +28,7 @@ export class AuthService implements IAuthService {
 
 	public async find(payload: JwtPayload): Promise<UserEntity> {
 		const user = await this.userService.findByPublicId(payload.publicId);
-		return user;
+		return plainToClass(UserEntity, user);
 	}
 
 	public async login(payload: JwtPayload): Promise<string> {
