@@ -4,13 +4,13 @@ export class TransactionDTO {
 	@IsNumber()
 	@Min(0.01)
 	@IsNotEmpty()
-	public value: number;
+	public readonly value: number;
 
 	@IsString()
 	@IsNotEmpty()
-	public senderDocument: string;
+	public readonly senderDocument: string;
 
 	@IsString()
 	@IsNotEmpty()
-	public receiverDocument: string;
+	public readonly receiverDocument: string;
 }

@@ -1,4 +1,5 @@
 import { Inject, Injectable } from "@nestjs/common";
+// biome-ignore lint/style/useImportType: <Cannot useImportType in classes used in Injection>
 import { CustomPrismaService } from "nestjs-prisma";
 import { Services } from "src/types/constants";
 import type { IUserRepository, UserEntity } from ".";

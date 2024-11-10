@@ -5,15 +5,14 @@ import { UserNotFoundError } from "src/common/errors";
 import type { JwtPayload } from "src/types";
 import { Services } from "src/types/constants";
 import { PasswordUtils } from "src/utils/password";
-// biome-ignore lint/style/useImportType: <Cannot useImportType in classes used in Injection>
-import { type UserEntity, UserService } from "../user";
-// biome-ignore lint/style/useImportType: <Cannot useImportType in DTOs>
-import { UserLoginDTO } from "../user/user.dto";
+import type { IAuthService } from ".";
+// biome-ignore lint/style/useImportType: <Cannot useImportType in classes used in Injection or DTOs>
+import { IUserService, type UserEntity, UserLoginDTO } from "../user";
 
 @Injectable()
-export class AuthService {
+export class AuthService implements IAuthService {
 	public constructor(
-		@Inject(Services.User) private readonly userService: UserService,
+		@Inject(Services.User) private readonly userService: IUserService,
 		private readonly jwtService: JwtService,
 	) {}
 
@@ -26,7 +25,7 @@ export class AuthService {
 		throw new UserNotFoundError();
 	}
 
-	public async find(payload: JwtPayload) {
+	public async find(payload: JwtPayload): Promise<UserEntity> {
 		const user = await this.userService.findByPublicId(payload.publicId);
 		return user;
 	}

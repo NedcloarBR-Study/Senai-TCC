@@ -1,6 +1,6 @@
 import { ValidationPipe } from "@nestjs/common";
 import { HttpAdapterHost } from "@nestjs/core";
-import { NestFastifyApplication } from "@nestjs/platform-fastify";
+import type { NestFastifyApplication } from "@nestjs/platform-fastify";
 import { PrismaClientExceptionFilter } from "nestjs-prisma";
 import { HttpExceptionFilter } from "src/common/filters";
 import {

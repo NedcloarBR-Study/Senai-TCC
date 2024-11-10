@@ -1,5 +1,4 @@
-import type { TransactionEntity } from ".";
-import type { TransactionDTO } from "./transaction.dto";
+import type { TransactionDTO, TransactionEntity } from ".";
 
 export interface ITransactionService {
 	create(data: TransactionDTO): Promise<TransactionEntity>;

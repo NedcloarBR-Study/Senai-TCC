@@ -1,8 +1,8 @@
 import { Body, Controller, Get, Inject, Post } from "@nestjs/common";
 import { plainToClass } from "class-transformer";
 import { Routes, Services } from "src/types/constants";
-import { type ITransactionService, TransactionEntity } from ".";
-import { TransactionDTO } from "./transaction.dto";
+// biome-ignore lint/style/useImportType: <Cannot useImportType in DTOs>
+import { type ITransactionService, TransactionDTO, TransactionEntity } from ".";
 
 @Controller(Routes.Transaction)
 export class TransactionController {

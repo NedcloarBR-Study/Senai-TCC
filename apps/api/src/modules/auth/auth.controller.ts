@@ -3,6 +3,7 @@ import {
 	Controller,
 	Get,
 	HttpStatus,
+	Inject,
 	Post,
 	Res,
 	UseGuards,
@@ -10,15 +11,16 @@ import {
 import type { FastifyReply } from "fastify";
 import { AuthUser } from "src/common/decorators/AuthUser.decorator";
 import { JwtAuthGuard } from "src/common/guards/jwt.guard";
-import type { UserEntity } from "../user";
+import { Routes, Services } from "src/types/constants";
+import type { IAuthService } from ".";
 // biome-ignore lint/style/useImportType: <Cannot useImportType on DTOs>
-import { UserLoginDTO } from "../user/user.dto";
-// biome-ignore lint/style/useImportType: <Cannot useImportType in classes used in Injection>
-import { AuthService } from "./auth.service";
+import { type UserEntity, UserLoginDTO } from "../user";
 
-@Controller("auth")
+@Controller(Routes.Auth)
 export class AuthController {
-	public constructor(private readonly authService: AuthService) {}
+	public constructor(
+		@Inject(Services.Auth) private readonly authService: IAuthService,
+	) {}
 
 	@Post("login")
 	public async login(

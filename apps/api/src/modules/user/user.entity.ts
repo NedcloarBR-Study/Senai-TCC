@@ -1,6 +1,6 @@
 import type { $Enums, User } from "@prisma/client";
 import { Exclude } from "class-transformer";
-import { TransactionEntity } from "../transaction";
+import type { TransactionEntity } from "../transaction";
 
 export class UserEntity implements User {
 	@Exclude()

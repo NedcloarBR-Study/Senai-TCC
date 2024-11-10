@@ -1,12 +1,13 @@
 import { Inject, Injectable, UnauthorizedException } from "@nestjs/common";
 import { Repositories, Services } from "src/types/constants";
-import type {
-	ITransactionRepository,
-	ITransactionService,
-	TransactionEntity,
+import {
+	type ITransactionRepository,
+	type ITransactionService,
+	// biome-ignore lint/style/useImportType: <Cannot useImportType in DTOs>
+	TransactionDTO,
+	type TransactionEntity,
 } from ".";
 import type { IUserService } from "../user";
-import { TransactionDTO } from "./transaction.dto";
 
 @Injectable()
 export class TransactionService implements ITransactionService {

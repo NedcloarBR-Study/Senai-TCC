@@ -1,9 +1,10 @@
-import { Injectable, UnauthorizedException } from "@nestjs/common";
+import { Inject, Injectable, UnauthorizedException } from "@nestjs/common";
 // biome-ignore lint/style/useImportType: <Cannot useImportType in classes used in Injection>
 import { ConfigService } from "@nestjs/config";
 import { PassportStrategy } from "@nestjs/passport";
 import { ExtractJwt, Strategy } from "passport-jwt";
 import type { JwtPayload } from "src/types";
+import { Services } from "src/types/constants";
 import type { UserEntity } from "../user";
 // biome-ignore lint/style/useImportType: <Cannot useImportType in classes used in Injection>
 import { AuthService } from "./auth.service";
@@ -11,7 +12,7 @@ import { AuthService } from "./auth.service";
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy, "JWT") {
 	constructor(
-		private readonly authService: AuthService,
+		@Inject(Services.Auth) private readonly authService: AuthService,
 		private readonly config: ConfigService,
 	) {
 		super({

@@ -1,10 +1,14 @@
 import { Inject } from "@nestjs/common";
 import type { CustomPrismaService } from "nestjs-prisma";
 import { Services } from "src/types/constants";
-import type { ITransactionRepository, TransactionEntity } from ".";
+// biome-ignore lint/style/useImportType: <Cannot useImportType in DTOs>
+import {
+	type ITransactionRepository,
+	TransactionDTO,
+	type TransactionEntity,
+} from ".";
 import type { ExtendedPrismaClient } from "../database/ExtendedPrismaClient";
 import type { IUserService } from "../user";
-import { TransactionDTO } from "./transaction.dto";
 
 export class TransactionRepository implements ITransactionRepository {
 	constructor(

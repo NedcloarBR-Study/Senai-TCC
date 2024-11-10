@@ -2,8 +2,13 @@ import { Inject, Injectable } from "@nestjs/common";
 import { genSalt, hash } from "bcrypt";
 import { Repositories } from "src/types/constants";
 import { PasswordUtils } from "src/utils/password";
-import { type IUserRepository, type IUserService, type UserEntity } from ".";
-import { UserDTO } from "./user.dto";
+// biome-ignore lint/style/useImportType: <Cannot useImportType in DTOs>
+import {
+	type IUserRepository,
+	type IUserService,
+	UserDTO,
+	type UserEntity,
+} from ".";
 
 @Injectable()
 export class UserService implements IUserService {

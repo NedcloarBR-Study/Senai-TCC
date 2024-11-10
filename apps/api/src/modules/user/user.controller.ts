@@ -19,8 +19,14 @@ import {
 } from "@nestjs/swagger";
 import { plainToClass } from "class-transformer";
 import { Routes, Services } from "src/types/constants";
-import { IUserService, UserEntity } from ".";
-import { UserDTO, UserDocumentDTO, UserEmailDTO } from "./user.dto";
+// biome-ignore lint/style/useImportType: <Cannot useImportType in DTOs>
+import {
+	type IUserService,
+	UserDTO,
+	UserDocumentDTO,
+	UserEmailDTO,
+	UserEntity,
+} from ".";
 
 @Controller(Routes.User)
 @ApiTags(Routes.User)

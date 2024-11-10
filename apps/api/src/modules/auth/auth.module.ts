@@ -1,11 +1,15 @@
-import { Module } from "@nestjs/common";
+import { Module, type Provider } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
 import { JwtModule } from "@nestjs/jwt";
 import { PassportModule } from "@nestjs/passport";
-import { UserModule } from "../user/user.module";
-import { AuthController } from "./auth.controller";
-import { AuthService } from "./auth.service";
-import { JwtStrategy } from "./jwt.strategy";
+import { Services } from "src/types/constants";
+import { AuthController, AuthService, JwtStrategy } from ".";
+import { UserModule } from "../";
+
+const authServiceProvider: Provider<AuthService> = {
+	provide: Services.Auth,
+	useClass: AuthService,
+};
 
 @Module({
 	imports: [
@@ -24,7 +28,7 @@ import { JwtStrategy } from "./jwt.strategy";
 		UserModule,
 	],
 	controllers: [AuthController],
-	providers: [JwtStrategy, AuthService],
-	exports: [AuthService],
+	providers: [JwtStrategy, authServiceProvider],
+	exports: [authServiceProvider],
 })
 export class AuthModule {}
