@@ -13,6 +13,7 @@ async function bootstrap(): Promise<void> {
 		AppModule,
 		new FastifyAdapter(),
 	);
+
 	const logger = new Logger("main");
 	const configService = app.get<ConfigService>(ConfigService);
 	const PORT = configService.getOrThrow<number>("PORT");
