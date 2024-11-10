@@ -15,7 +15,9 @@
 	},
 	"private": true,
 	"license": "MIT",
-	"workspaces": ["apps/*"],
+	"workspaces": [
+		"apps/*"
+	],
 	"engines": {
 		"node": "20.9.0"
 	},
